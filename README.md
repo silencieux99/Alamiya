@@ -13,14 +13,14 @@ Application mobile multiplateforme (iOS + Android) de type Leboncoin, adaptée a
 - ✅ **Immobilier** : Types de biens, superficie, nombre de pièces
 - ✅ **Favoris** : Sauvegarde des annonces favorites
 - ✅ **Notifications** : Push notifications via Firebase Cloud Messaging
-- ✅ **Images** : Upload vers Vercel Blob
+- ✅ **Images** : Upload vers Firebase Storage
 
 ## 🛠 Stack technique
 
 - **Framework** : React Native (Expo)
 - **Base de données** : Firebase Firestore
 - **Authentification** : Firebase Auth
-- **Stockage** : Vercel Blob
+- **Stockage** : Firebase Storage
 - **Notifications** : Firebase Cloud Messaging
 - **Navigation** : React Navigation
 
@@ -32,7 +32,6 @@ Application mobile multiplateforme (iOS + Android) de type Leboncoin, adaptée a
 - npm ou yarn
 - Expo CLI (`npm install -g expo-cli`)
 - Compte Firebase
-- Compte Vercel (pour Blob)
 
 ### Étapes
 
@@ -52,10 +51,9 @@ Application mobile multiplateforme (iOS + Android) de type Leboncoin, adaptée a
    - Récupérer les clés de configuration
    - Mettre à jour `src/firebase/config.js` avec vos clés
 
-4. **Configurer Vercel Blob**
-   - Créer un projet Vercel
-   - Récupérer le token Blob
-   - Mettre à jour `src/services/blobService.js` avec votre token
+4. **Activer Firebase Storage**
+   - Dans Firebase Console, activer **Storage**
+   - Déployer les règles de sécurité : `firebase deploy --only storage:rules`
 
 5. **Configurer Google Sign-In** (optionnel)
    - Ajouter votre `webClientId` dans `src/services/authService.js`

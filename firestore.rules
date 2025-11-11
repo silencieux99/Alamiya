@@ -1,0 +1,58 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Fonction helper pour vérifier l'authentification
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Fonction helper pour vérifier le propriétaire
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    // Annonces
+    match /annonces/{adId} {
+      // Lecture publique
+      allow read: if true;
+      
+      // Création : utilisateur authentifié
+      allow create: if isAuthenticated() 
+        && request.resource.data.userId == request.auth.uid;
+      
+      // Modification/Suppression : propriétaire uniquement
+      allow update, delete: if isOwner(resource.data.userId);
+    }
+    
+    // Utilisateurs
+    match /utilisateurs/{userId} {
+      // Lecture : publique
+      allow read: if true;
+      
+      // Écriture : propriétaire uniquement
+      allow write: if isOwner(userId);
+    }
+    
+    // Favoris
+    match /favoris/{favoriteId} {
+      // Lecture : utilisateur authentifié (ses propres favoris)
+      allow read: if isAuthenticated() 
+        && resource.data.userId == request.auth.uid;
+      
+      // Création : utilisateur authentifié
+      allow create: if isAuthenticated() 
+        && request.resource.data.userId == request.auth.uid;
+      
+      // Suppression : propriétaire uniquement
+      allow delete: if isOwner(resource.data.userId);
+    }
+    
+    // Communes (lecture seule)
+    match /communes/{communeId} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}
+

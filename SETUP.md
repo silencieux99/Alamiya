@@ -66,23 +66,30 @@ service cloud.firestore {
 }
 ```
 
-## 📦 Configuration Vercel Blob
+## 📦 Configuration Firebase Storage
 
-### 1. Créer un projet Vercel
+### 1. Activer Firebase Storage
 
-1. Aller sur [Vercel](https://vercel.com)
-2. Créer un compte ou se connecter
-3. Créer un nouveau projet
+1. Dans [Firebase Console](https://console.firebase.google.com/project/alamiya-app-e033a), aller dans **Storage**
+2. Cliquer sur **Commencer**
+3. Choisir le mode :
+   - **Mode production** : Règles de sécurité strictes (recommandé)
+   - **Mode test** : Accès libre pendant 30 jours (pour développement)
+4. Choisir une région (ex: `europe-west`)
 
-### 2. Obtenir le token Blob
+### 2. Déployer les règles de sécurité
 
-1. Dans le dashboard Vercel, aller dans **Settings** > **Storage**
-2. Créer un nouveau Blob Store
-3. Récupérer le token d'accès
-4. Mettre à jour `src/services/blobService.js` :
-   ```javascript
-   const BLOB_TOKEN = 'votre-token-ici';
-   ```
+Les règles de sécurité sont déjà configurées dans `storage.rules`. Pour les déployer :
+
+```bash
+firebase deploy --only storage:rules
+```
+
+Les règles permettent :
+- ✅ Lecture publique des images
+- ✅ Écriture uniquement pour les utilisateurs authentifiés
+- ✅ Limite de taille : 5MB pour annonces, 2MB pour avatars
+- ✅ Types de fichiers : uniquement les images
 
 ## 🔐 Configuration Google Sign-In
 
@@ -152,7 +159,7 @@ const seedCommunes = async () => {
 - [ ] `GoogleService-Info.plist` ajouté (iOS)
 - [ ] Authentication activée (Email, Google, Phone)
 - [ ] Règles Firestore configurées
-- [ ] Token Vercel Blob configuré
+- [ ] Firebase Storage activé et règles déployées
 - [ ] Google OAuth configuré
 - [ ] Notifications configurées
 - [ ] Assets (icônes, splash) ajoutés
