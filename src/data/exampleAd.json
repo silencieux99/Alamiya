@@ -1,0 +1,31 @@
+{
+  "id": "example-ad-123",
+  "userId": "user-456",
+  "title": "Renault Clio 2020 - Excellent état",
+  "description": "Véhicule en excellent état, toutes révisions faites chez Renault. Premier propriétaire. Vendu avec carnet d'entretien complet.",
+  "category": "vehicules",
+  "subcategory": "voitures",
+  "price": 3500000,
+  "currency": "DZD",
+  "wilayaId": 16,
+  "wilayaName": "Alger",
+  "communeId": 1601,
+  "communeName": "Alger Centre",
+  "phone": "+213555123456",
+  "images": [
+    "https://example.com/image1.jpg",
+    "https://example.com/image2.jpg",
+    "https://example.com/image3.jpg"
+  ],
+  "createdAt": "2024-01-15T10:30:00Z",
+  "updatedAt": "2024-01-15T10:30:00Z",
+  "views": 42,
+  "status": "active",
+  "brand": "renault",
+  "model": "Clio",
+  "year": 2020,
+  "mileage": 45000,
+  "fuelType": "essence",
+  "transmission": "manuelle"
+}
+
